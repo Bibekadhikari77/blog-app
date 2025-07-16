@@ -9,6 +9,11 @@ const blogSchema = new mongoose.SchemaType({
         type: String,
         required: true
     },
+    author: {
+        type: String,
+        ref: 'User',
+        required: true
+    },
 })
 
 module.exports = mongoose.model('Blog',blogSchema)
