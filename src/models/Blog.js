@@ -14,6 +14,9 @@ const blogSchema = new mongoose.SchemaType({
         ref: 'User',
         required: true
     },
+    image: [{
+        type: String
+       }]
 })
 
 module.exports = mongoose.model('Blog',blogSchema)
