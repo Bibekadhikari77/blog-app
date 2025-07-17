@@ -11,6 +11,7 @@ const PORT = process.env.PORT
 app.use(express.json()); 
 
 app.use('/api/users',require('./src/routes/userRoutes'))
+app.use('/api/blogs', require('./src/routes/blogRoutes'))
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}..`)

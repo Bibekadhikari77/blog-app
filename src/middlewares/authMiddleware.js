@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken")
-const User = require("../models/User.js")
+const User = require("../models/Users");
 const asyncHandler = require("../utils/AsyncHandler.js")
-
 //Auth middleware   
 const protect = asyncHandler(async(req, res , next) => {
     let token;
@@ -29,4 +28,14 @@ const protect = asyncHandler(async(req, res , next) => {
     }
 });
 
-module.exports = protect;
+const authorizeRoles = (...roles) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            res.status(403);
+            throw new Error("Not authorized as an admin");
+        }
+        next();
+    };
+};
+
+module.exports = {protect, authorizeRoles};
