@@ -13,6 +13,7 @@ const protect = asyncHandler(async(req, res , next) => {
             token =req.headers.authorization.split(" ")[1];
             //decode token
             const decoded = jwt.verify(token,process.env.JWT_SECRET);
+            req.user = await User.findById(decoded.id);
             // attach user (without password)
             req.User = await User.findById(decoded.id).select("-password");
             next();
@@ -30,7 +31,7 @@ const protect = asyncHandler(async(req, res , next) => {
 
 const authorizeRoles = (...roles) => {
     return (req, res, next) => {
-        if (!roles.includes(req.user.role)) {
+        if (!roles.includes(req.user.roles)) {
             res.status(403);
             throw new Error("Not authorized as an admin");
         }

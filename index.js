@@ -9,6 +9,7 @@ connectDB()
 const PORT = process.env.PORT
 
 app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/users',require('./src/routes/userRoutes'))
 app.use('/api/blogs', require('./src/routes/blogRoutes'))
