@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/users',require('./src/routes/userRoutes'))
 app.use('/api/blogs', require('./src/routes/blogRoutes'))
+app.use('/api/comments', require('./src/routes/commentRoutes'))
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}..`)
